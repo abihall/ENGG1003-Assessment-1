@@ -20,6 +20,7 @@ int main()
 
 		else if(letter[i]>='a' && letter[i]<='z') {
 		    letter[i]=letter[i]-32;
+		    letter[i] = (letter[i]-'A' + rotation_amount)%26+'A';
 		 
 		}
 	}
@@ -28,5 +29,4 @@ int main()
 	return letter[i];
 	
 }
-
 
