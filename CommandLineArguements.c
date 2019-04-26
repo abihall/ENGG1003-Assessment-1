@@ -2,13 +2,8 @@
 #include<string.h>
 
 /*DIFFERENT FILES USDE AND WHAT THEY ALL CONTAIN
-case1.input contains a block of text to be encrypted
+case1.input contains a block of text that any operation can manipulate 
 case1.rotation contains the rotation amount as a integer
-case2.input contains a block of text to be decrypted 
-case2.rotation contains the rotation amount as a int
-case3.input contains the block of text to be encrypted by substitution cipher (this alternate alphabet is hard coded)
-case4.input contains the block of text to be decrypted by substitution sipher (this alternate alphabet is hard coded)
-case5.input contains 
 */
 
 	
