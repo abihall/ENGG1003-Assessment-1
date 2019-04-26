@@ -60,10 +60,10 @@ int main() {
 	int i, rotation_amount;
 	
 	  FILE *input;               //opening the input.txt file and is reading its content
-	 input=fopen("case2.input", "r");
+	 input=fopen("case1.input", "r");
 	 
 	   FILE *RAE;
-	   RAE=fopen("case2.rotation", "r");
+	   RAE=fopen("case1.rotation", "r");
 	 
 	   fgets(letter, 100, input);
 	 fscanf(RAE, "%d", &rotation_amount);
@@ -94,7 +94,7 @@ int main() {
             printf("message encrypted by substitution:\n");  
         
             FILE *input;               //opening the case3.input file and is reading its content
-	        input=fopen("case3.input", "r");
+	        input=fopen("case1.input", "r");
 	         
 	         fgets(msg, 100, input);
 	        
@@ -121,7 +121,7 @@ int main() {
     printf("message decrypted by substitution:\n");  
     
      FILE *input;               //opening the case4.input file and is reading its content
-	        input=fopen("case4.input", "r");
+	        input=fopen("case1.input", "r");
 	         
 	         fgets(msg, 100, input); 
     
