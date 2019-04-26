@@ -1,6 +1,6 @@
 #include<stdio.h> 
 #include<string.h>
-	
+	/*
 int main() {
     int choice;
     printf("The following are the avaliable code selections:\n");
@@ -40,7 +40,7 @@ int main() {
     {
     char letter[100];
 	int i, rotation_amount;
-	printf("Enter a message to Decrypt:\n");
+	printf("Enter a message to encrypt:\n");
 	scanf(" %[^\n]s", letter);
 	printf("Enter rotation amount:\n ");
 	scanf("%d", &rotation_amount);
@@ -63,34 +63,32 @@ int main() {
 
             break;
 }
-
         case 3:
         {
-            char msg[100];
-            char str[]={"LPEUMVATWCSFJBKXNGYDHZROIQ"};
-            int u=0, p=0;
-            char c=0, w;
-        	printf("Enter a Message to Encrypt:\n"); 
-        	scanf(" %[^\n]s", msg);          //scans input from the user and turns it into a string with name msg
-            printf("message encrypted by substitution:\n");  
-        
-            for (c=0; msg[c] != 0; ++c){
-                if(msg[c]>='A' && msg[c]<='Z'){
-                    w=str[msg[c]-65];
-                    printf("%c", w); 
-                }
-                else if(msg[c]<'A'){
-                    w = msg[c];
-                printf("%c", w); 
-            }
-
-            }
-        return 0;
+    char msg[100];
+    char str[]={"LPEUMVATWCSFJBKXNQYDHZROIQ"};
+    int u=0, p=0;
+    char c=0, w;
+	printf("Enter a message to encrypt:\n"); 
+	scanf(" %[^\n]s", msg);          //scans input from the user and turns it into a string with name msg
+    printf("message encrypted by substitution:\n");  
+    
+      for (c=0; msg[c] != 0; ++c){
+            
+            w=str[msg[c]-65]; 
+            printf("%c", w); 
         }
+}
+  
 
+
+        return 0;
+    
+
+            break;
         case 4:  {
     char msg[100];
-    char str[]={"LPEUMVATWCSFJBKXNGYDHZROIQ"};
+    char str[]={"LPEUMVATWCSFJBKXNQYDHZROIQ"};
     char alph[]={"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
     int u=0, p=0;
     char c=0, w;
@@ -108,49 +106,19 @@ int main() {
             w = alph[index]; // key is the alternate alphabet
             printf("%c", w); 
         }
-        else
-            printf("%c", w);
-    }
+        else printf("%c", w);
+        }
 }
+  
 return 0;
             break;
-            
-            
         case 5:
-        {
-    char Mes[]={"BMEQ ARE %"}; 
-	int i, rotation_amount=1;
-  	
-	while (rotation_amount<=26) { //while rotation amount is <26 and is ++ it will give all possible decrypted messages 
-	   char Mes[]={"BMEQ ARE %"};
-	
-	for(i = 0; Mes[i] != '\0'; i++){ //i is incrumented so it sifts through the string and encrypts it
-		if(Mes[i] >= 'A' && Mes[i] <= 'Z'){
-			Mes[i] = (Mes[i]-'A' - rotation_amount)%26+'A';
-		  while (Mes[i]<'A' && Mes[i] != ' ')
-		    Mes[i]=Mes[i]+26;
-	   }
-		else if(Mes[i]>='a' && Mes[i]<='z') {
-		    Mes[i]=Mes[i]-32;
-		    Mes[i] = (Mes[i]-'A' - rotation_amount)%26+'A';
-		  while (Mes[i]<'A' && Mes[i] != ' ')
-		    Mes[i]=Mes[i]+26;  
-		}
- }
-        printf("A possible decrypted message is: %s with rotation %d\n", Mes, rotation_amount);
-         ++rotation_amount;
-     }
- }
             break;
-            
         case 6: printf("Goodbye!\n"); 
             break;
-            
-            
         default: printf("incorrect input, please enter 1,2,3,4,5 or 6.\n");
             break;
     }
 return 0;
 }
-
 

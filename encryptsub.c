@@ -1,6 +1,6 @@
 #include<stdio.h>
  
-
+/*
  int main()
 {
     char msg[100];
@@ -24,7 +24,7 @@
 	      i++;
 	      printf("%s", str);   
    }
-   */
+   
         for (c=0; msg[c] != 0; ++c){
             
             w=str[msg[c]-65]; 
