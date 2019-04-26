@@ -8,6 +8,7 @@ int main() {
     printf("Type '2' if you would like to Decrypt by rotation and message\n");
     printf("Type '3' if you would like to Encrypt by a substitution alphabet\n");
     printf("Type '4' if you would like to Decrypt by substitution alphabet\n");
+    printf("Type '5' if you would like to Decrypt by rotation cipher without key\n");
     printf("Type '6' if you would like to quit\n");
     scanf("%d", &choice);
     
@@ -118,12 +119,11 @@ return 0;
             
         case 5:
         {
-    char Mes[]={"BMEQ ARE %"}; 
+    char Mes[]={"SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"};
 	int i, rotation_amount=1;
   	
 	while (rotation_amount<=26) { //while rotation amount is <26 and is ++ it will give all possible decrypted messages 
-	   char Mes[]={"BMEQ ARE %"};
-	
+	   char Mes[]={"SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"};
 	for(i = 0; Mes[i] != '\0'; i++){ //i is incrumented so it sifts through the string and encrypts it
 		if(Mes[i] >= 'A' && Mes[i] <= 'Z'){
 			Mes[i] = (Mes[i]-'A' - rotation_amount)%26+'A';
