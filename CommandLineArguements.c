@@ -1,7 +1,19 @@
 #include<stdio.h> 
 #include<string.h>
+
+/*DIFFERENT FILES USDE AND WHAT THEY ALL CONTAIN
+case1.input contains a block of text to be encrypted
+case1.rotation contains the rotation amount as a integer
+case2.input contains a block of text to be decrypted 
+case2.rotation contains the rotation amount as a int
+case3.input contains the block of text to be encrypted by substitution cipher (this alternate alphabet is hard coded)
+case4.input contains the block of text to be decrypted by substitution sipher (this alternate alphabet is hard coded)
+case5.input contains 
+*/
+
 	
 int main() {
+ 
     int choice;
     printf("The following are the avaliable code selections:\n");
     printf("Type '1' if you would like to Encrypt by rotation and message\n");
@@ -15,13 +27,19 @@ int main() {
     switch(choice){
 //CASE 1 ENCRYPTION BY ROTATION CYPHER 
         case 1:  {
+ 
     char letter[100];
 	int i, rotation_amount;
-	printf("Enter a message to encrypt:\n");
-	scanf(" %[^\n]s", letter);
-	printf("Enter rotation amount:\n ");
-	scanf("%d", &rotation_amount);
-	   
+	
+	   FILE *input;               //opening the input.txt file and is reading its content
+	 input=fopen("case1.input", "r");
+	 
+	   FILE *RAE;
+	   RAE=fopen("case1.rotation", "r");
+	 
+	   fgets(letter, 100, input);
+	 fscanf(RAE, "%d", &rotation_amount);
+	  
 	for(i = 0; letter[i] != '\0'; ++i){
 		if(letter[i] >= 'A' && letter[i] <= 'Z'){
 			letter[i] = (letter[i]-'A' + rotation_amount)%26+'A';
@@ -33,19 +51,24 @@ int main() {
 	}
     
 	printf("Encrypted message: %s\n", letter);
-	return letter[i];
 }
             break;
 //CASE 2 DECRYPTION BY ROTATION CYPHER 
         case 2: {
-    {
+    
     char letter[100];
 	int i, rotation_amount;
-	printf("Enter a message to Decrypt:\n");
-	scanf(" %[^\n]s", letter);
-	printf("Enter rotation amount:\n ");
-	scanf("%d", &rotation_amount);
-	   
+	
+	  FILE *input;               //opening the input.txt file and is reading its content
+	 input=fopen("case2.input", "r");
+	 
+	   FILE *RAE;
+	   RAE=fopen("case2.rotation", "r");
+	 
+	   fgets(letter, 100, input);
+	 fscanf(RAE, "%d", &rotation_amount);
+	  
+	
 	for(i = 0; letter[i] != '\0'; ++i){
 		if(letter[i] >= 'A' && letter[i] <= 'Z'){
 	      letter[i] = (letter[i]-'A' - rotation_amount)%26+'A';
@@ -59,22 +82,22 @@ int main() {
 	}	
 
     }   printf("Encrypted message: %s\n", letter);
-	return 0;
-    }
-
+    
             break;
 }
-
         case 3:
         {
             char msg[100];
             char str[]={"LPEUMVATWCSFJBKXNGYDHZROIQ"};
             int u=0, p=0;
             char c=0, w;
-        	printf("Enter a Message to Encrypt:\n"); 
-        	scanf(" %[^\n]s", msg);          //scans input from the user and turns it into a string with name msg
             printf("message encrypted by substitution:\n");  
         
+            FILE *input;               //opening the case3.input file and is reading its content
+	        input=fopen("case3.input", "r");
+	         
+	         fgets(msg, 100, input);
+	        
             for (c=0; msg[c] != 0; ++c){
                 if(msg[c]>='A' && msg[c]<='Z'){
                     w=str[msg[c]-65];
@@ -82,7 +105,7 @@ int main() {
                 }
                 else if(msg[c]<'A'){
                     w = msg[c];
-                printf("%c", w); 
+                    printf("%c", w); 
             }
 
             }
@@ -95,9 +118,12 @@ int main() {
     char alph[]={"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
     int u=0, p=0;
     char c=0, w;
-	printf("Enter a message to decrypt:\n"); 
-	scanf(" %[^\n]s", msg);          //scans input from the user and turns it into a string with name msg
     printf("message decrypted by substitution:\n");  
+    
+     FILE *input;               //opening the case4.input file and is reading its content
+	        input=fopen("case4.input", "r");
+	         
+	         fgets(msg, 100, input); 
     
       for (c=0; msg[c] != 0; ++c){
            w = msg[c]; 
@@ -145,7 +171,6 @@ return 0;
             
         case 6: printf("Goodbye!\n"); 
             break;
-            
             
         default: printf("incorrect input, please enter 1,2,3,4,5 or 6.\n");
             break;
