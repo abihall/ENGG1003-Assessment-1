@@ -97,14 +97,14 @@ int main() {
         	                                                            //From this the rotation amount is then minused. The %26 ensures if (letter[i]-‘A’ + rotation_amount) exceeds 26 it will rotate back to the corresponding value under 25 
         	                                                            //eg. 27=>1. From this, the ASCII value of ‘A’ is added on again to get the ASCII back to capital letters.
         	      
-        	       while (letter[i]<'A' && letter[i] != ' ') //since it is decryption, this loop is required to convert any character below the ASCII 'A' that may be formed into the required letter
-        		          letter[i]=letter[i]+26;//adds 26 to letter[i] to convert a ASCII value lower than ‘A’ into a ASCII value between 'A' and 'Z' and hence get the correct decryption
+        	       while (letter[i]<'A' && letter[i] != ' ') //since it is decryption, this loop is required to convert any character below the ASCII 'A' into the required letter, excluding black spaces. 
+        		          letter[i]=letter[i]+26;//adds 26 to letter[i] to convert a ASCII value lower than ‘A’ into a ASCII value between 'A' and 'Z' and hence get the correct decryption. 
         		   }	
         	    else if(letter[i]>='a' && letter[i]<='z') { //tests if letter[] at i is lower case by testing if letter[i] is between the ASCII values for a and z. 
         		   letter[i]=letter[i]-32; //misusing 32 transforms any lower case letter into the corresponding upper case. This process is based off the ASCII table. 
         		   letter[i] = (letter[i]-'A' - rotation_amount)%26+'A'; //this is the ‘formula’/process used to decrypt the letter at i. The ASCII value of ‘A’ is misused from letter[i] to get a value between 0-25. From this the rotation amount is then minused The %26 ensures if (letter[i]-‘A’ + rotation_amount) exceeds 26 it will rotate back to the corresponding value under 25 eg. 27=>1. From this, the ASCII value of ‘A’ is added on again to get the ASCII back to capital letters.
         		   
-                     while (letter[i]<'A' && letter[i] != ' ') 
+                     while (letter[i]<'A' && letter[i] != ' ')  //since it is decryption, this loop is required to convert any character below the ASCII 'A' into the required letter, excluding black spaces.
         		               letter[i]=letter[i]+26; 
         	       }	
         
@@ -118,7 +118,7 @@ int main() {
         case 3:
         {
             char msg[100]; 
-            char str[]={"LPEUMVATWCSFJBKXNGYDHZROIQ"};
+            char str[]={"LPEUMVATWCSFJBKXNGYDHZROIQ"}; //alternate alphabet is hard coded as str[]
             char c=0, w;
             printf("access case.output to see the message encrypted by substitution:\n");  
         
@@ -128,14 +128,15 @@ int main() {
 	        FILE *output; //*output is a pointer to the next line that opens a file writes to it
 	        output=fopen("case.output", "w");
 	         
-	        fgets(msg, 100, input); //this function gets a string called 'msg' that is 100 characters long. 'input’ is the pointer to a FILE object that identifies the stream where characters are read from.
+	        fgets(msg, 100, input); //this function gets a string called 'msg' that is 100 characters long. 
+	                                //'input’ is the pointer to a FILE object that identifies the stream where characters are read from.
 	        
-            for (c=0; msg[c] != 0; ++c){
-                if(msg[c]>='A' && msg[c]<='Z'){
-                    w=str[msg[c]-65]; 
-                    fprintf(output, "%c", w); 
+            for (c=0; msg[c] != 0; ++c){ //ensures that the code doesn’t continue executing once the end of the string has been met. Increments the counter, c, and also initialises it to 0.
+                if(msg[c]>='A' && msg[c]<='Z'){ //ensures that msg[c] is between the ASCII values for A and Z
+                    w=str[msg[c]-65];  //msg[c] gives a value between 0-25 which can then be used as a key within str to find the corresponding letter. 
+                    fprintf(output, "%c", w);  
                 }
-                else if(msg[c]<'A'){
+                else if(msg[c]<'A'){ // ensures that if msg[c] was a space or a special character it is still file printed and not encrypted. 
                     w = msg[c];
                     fprintf(output, "%c", w); 
                 }
@@ -163,17 +164,17 @@ int main() {
               for (c=0; msg[c] != 0; ++c){      //this for loop ensures that the char Mes[] at c in the array isnt equal to \0 or NULL
         	                                    //increments the value of c by 1 every time the loop is executed.
         	                                    //This for loop ensures the program stops executing when the end of the array is reached
-                   w = msg[c]; 
-                    char *tmp;
-                    int index;
-                if (w>='A' && w<='Z'){ 
-                    tmp = strchr(str, w);
-                    index = (int)(tmp-str);
-                    w = alph[index]; // key is the alternate alphabet
-                    fprintf(output, "%c", w); 
+                   w = msg[c]; //w is of type char and is equated to msg[c] 
+                    char *tmp; //a pointer to tmp function is initialised
+                    int index; //a int index is initialised 
+                if (w>='A' && w<='Z'){  //for w being between the ASCII ‘A’ and ‘Z’
+                    tmp = strchr(str, w); //the function tmp searchs for the first occurrence of the character w in the string str.
+                    index = (int)(tmp-str); //the int index is equal to the first occurrence of w in the string-the original string position
+                    w = alph[index]; // from here, w is given a new value by the value of index and this values position in the alphabet given by the string alph. Eg. Index=2, alph[2] is ‘B’.
+                    fprintf(output, "%c", w);  //prints a char called w to the file initialised by output
                 }
-                else
-                    fprintf(output, "%c", w);
+                else //this else statement is used to ensure all spaces are still included once the code has been decrypted 
+                    fprintf(output, "%c", w); 
             }
         }
                 break;
@@ -194,20 +195,23 @@ int main() {
                for(i = 0; Mes[i] != '\0'; i++){ //this for loop ensures that the char Mes[] at i in the array isnt equal to \0 or NULL
         	                                    //increments the value of i by 1 every time the loop is executed.
         	                                    //This for loop ensures the program stops executing when the end of the array is reached
-            		if(Mes[i] >= 'A' && Mes[i] <= 'Z'){
-            			Mes[i] = (Mes[i]-'A' - rotation_amount)%26+'A';
+            		if(Mes[i] >= 'A' && Mes[i] <= 'Z'){ //loop executes if Mes[i] is found to be upper case
+            			Mes[i] = (Mes[i]-'A' - rotation_amount)%26+'A'; //this is the ‘formula’/process used to decrypt the letter at i. The ASCII value of ‘A’ is misused from letter[i] to get a value between 0-25. From this the rotation amount is then minused The %26 ensures if (letter[i]-‘A’ + rotation_amount) exceeds 26 it will rotate back to the corresponding value under 25 eg. 27=>1. From this, the ASCII value of ‘A’ is added on again to get the ASCII back to capital letters.
             			
-            		  while (Mes[i]<'A' && Mes[i] != ' ')
+            		  while (Mes[i]<'A' && Mes[i] != ' ') //checks if Mes[i] is less than the ASCII value of A and isnt the ASCII value for a space 
             		    Mes[i]=Mes[i]+26; //adds 26 to Mes[i] to convert a ASCII value lower than ‘A’ into a ASCII value between ‘A’ and ‘Z’ and hence get the correct decryption
             	   }
-            		else if(Mes[i]>='a' && Mes[i]<='z') {
-            		    Mes[i]=Mes[i]-32;
-            		    Mes[i] = (Mes[i]-'A' - rotation_amount)%26+'A'; //this is the ‘formula’/process used to decrypt Mes at i. The ASCII value of ‘A’ is misused from Mes[i] to get a value between 0-25. From this the rotation amount is then minused The %26 ensures if (Mes[i]-‘A’ + rotation_amount) exceeds 26 it will rotate back to the corresponding value under 25 eg. 27=>1. From this, the ASCII value of ‘A’ is added on again to get the ASCII back to capital letters.
+            		else if(Mes[i]>='a' && Mes[i]<='z') { //checks if Mes[] is lower case
+            		    Mes[i]=Mes[i]-32; //converts lower case into upper case
+            		    Mes[i] = (Mes[i]-'A' - rotation_amount)%26+'A'; 
             		    
-            		  while (Mes[i]<'A' && Mes[i] != ' ')
-            		    Mes[i]=Mes[i]+26;  //adds 26 to Mes[i] to convert a ASCII value lower than ‘A’ into a ASCII value between ‘A’ and ‘Z’ and hence get the correct decryption
+            		  while (Mes[i]<'A' && Mes[i] != ' ') //checks if Mes[i] is less than the ASCII value of A and isnt the ASCII value for a space 
+            		    Mes[i]=Mes[i]+26;  //since it is decryption, this loop is required to convert any character below the ASCII 'A' into the required letter, excluding black spaces.
             		}
+            		
          }
+         
+         if
                 fprintf(output, "A possible decrypted message is: %s with rotation %d\n", Mes, rotation_amount); //sends output to case.output.
                 ++rotation_amount; //increments the rotation_amount to get all 26 rotations
              }
