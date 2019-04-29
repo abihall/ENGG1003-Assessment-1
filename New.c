@@ -15,7 +15,7 @@ int main() {
     //gives instructions to the user of inputting text and rotation amount. Ensures the user has placed the text into case.input
     //lists the code selections which refers to how the user wants to encrypt of decript, also gives the use user a option to quit
    
-    printf("Before you begin, ensure any message you want to encrypt/decrypt is found within case.input file and the desired rotation amount\nis found in case.rotation\n");
+    printf("Before you begin, ensure any message you want to encrypt/decrypt is found within case.input file and the desired rotation amount\nis found in case.rotation.\nPlease also note that Decryption by rotation cipher without rotation amount, the message has to be hard coded.\n");
     printf("\n If the above is complete, the following are the avaliable code selections:\n");
     printf("Type '1' and then <enter> if you would like to Encrypt by rotation and message\n"); 
     printf("Type '2' and then <enter> if you would like to Decrypt by rotation and message\n"); 
@@ -120,7 +120,7 @@ int main() {
             char msg[100]; 
             char str[]={"LPEUMVATWCSFJBKXNGYDHZROIQ"}; //alternate alphabet is hard coded as str[]
             char c=0, w;
-            printf("access case.output to see the message encrypted by substitution:\n");  
+            printf("access case.output to see the message encrypted by substitution:\n");  //user friendly comment
         
             FILE *input;               //opening the case.input file and is reading its content
 	        input=fopen("case.input", "r");
@@ -178,20 +178,32 @@ int main() {
             }
         }
                 break;
-                
+               
 //DECRYPTION BY ROTATION CIPHER WITHOUT ROTATION AMOUNT/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
         case 5:
        {
             int i, rotation_amount=1;
+        	
         	 
         	FILE *output; //*output is a pointer to the next line that opens a file writes to it
 	        output=fopen("case.output", "w");
 	        
-	        FILE *input;               //opening the case.input file and is reading its content
-            input=fopen("case.input", "r");
+	        
           	
         	while (rotation_amount<=26) { //while rotation amount is <26 and is ++ it will give all possible decrypted messages 
-        	   char Mes[]={"SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"};
+        	   char Mes[]={"TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."}; //hard coded message to be derypted 
+        	   char sub[5]={" THE "}; //the first most popular word
+        	   char sub2[5]={" AND "}; //next most popular third letter word
+        	   char sub3[5]={" YOU "}; //the following are more tested words
+        	   char sub4[5]={" FOR "};
+        	   char sub5[6]={" FROM "};
+        	   char sub6[6]={" WITH "};
+        	   char sub7[6]={" THIS "};
+        	   char sub8[6]={" YOUR "};
+        	   char sub9[5]={" ALL "};
+        	   char sub10[5]={" NOT "};
+        	   
+        	   
                for(i = 0; Mes[i] != '\0'; i++){ //this for loop ensures that the char Mes[] at i in the array isnt equal to \0 or NULL
         	                                    //increments the value of i by 1 every time the loop is executed.
         	                                    //This for loop ensures the program stops executing when the end of the array is reached
@@ -208,28 +220,60 @@ int main() {
             		  while (Mes[i]<'A' && Mes[i] != ' ') //checks if Mes[i] is less than the ASCII value of A and isnt the ASCII value for a space 
             		    Mes[i]=Mes[i]+26;  //since it is decryption, this loop is required to convert any character below the ASCII 'A' into the required letter, excluding black spaces.
             		}
-            		
          }
          
-         if
-                fprintf(output, "A possible decrypted message is: %s with rotation %d\n", Mes, rotation_amount); //sends output to case.output.
-                ++rotation_amount; //increments the rotation_amount to get all 26 rotations
-             }
-                printf("see case.output file to read the ecrypted message\n");
-                    break;
-          }         
+      //testing if any one of a range words is found in the decrypted text for each rotation. prints all the decrypted message if any word is found
 
-                
+                if (strstr(Mes, sub) != NULL){ //If a sub-string was not found, it returns a NULL. checking if sub is found in Mes
+                             fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount); //printing Mes and the rotation amount to a file
+                         }
+                else if(strstr(Mes, sub2) != NULL){ //If a sub-string was not found, it returns a NULL. checking if sub2 is found in Mes
+                     fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount); //printing Mes and the rotation amount to a file
+                }
+                else if(strstr(Mes, sub3) != NULL){
+                    fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount);
+                }
+               else if(strstr(Mes, sub4) != NULL){
+                    fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount);
+                }
+               else if(strstr(Mes, sub5) != NULL){
+                    fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount);
+                }
+               else if(strstr(Mes, sub6) != NULL){
+                    fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount);
+                }
+               else if(strstr(Mes, sub7) != NULL){
+                    fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount);
+                }
+               else if(strstr(Mes, sub8) != NULL){
+                    fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount);
+                }
+               else if(strstr(Mes, sub9) != NULL){
+                    fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount);
+                }
+               else if(strstr(Mes, sub10) != NULL){
+                    fprintf(output, "decrypted message is %s with rotation %d", Mes, rotation_amount);
+                }
+              
+                ++rotation_amount; //increments the rotation_amount to get all 26 rotations char str[] = "String";
+     }
+     
+
+                printf("see case.output file to read the ecrypted message\n"); //user friendly messag
+                    break;
+    }
+        
         case 6:
         
-            printf("Goodbye!\n"); 
+            printf("Goodbye!\n"); //user friendly message if they are exiting
             break;
             
         default: 
         
-            printf("incorrect input, please start again and enter 1,2,3,4,5 or 6.\n");
+            printf("incorrect input, please start again and enter 1,2,3,4,5 or 6.\n"); //default is used if hte user inputs a number that isnt in the switch case
             break;
-    }
-return 0;
-}
+            
+        }
+    
+} 
 
